@@ -27,25 +27,42 @@ namespace ReleApp
         {
             InitializeComponent();
 
-            
+            if(!releManager.InitRele())
+            {
+                //сообщение об ошибке
+            }
         }
+
+        private Rele releManager = new Rele();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            UdpClient client = new UdpClient();
-            client.Connect("169.254.153.128", 1200);
-            string message = ":04;";
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            int numberOfSentBytes = client.Send(data, data.Length);
+            //UdpClient client = new UdpClient();
+            //client.Connect("169.254.153.128", 1200);
+            //string message = ":04;";
+            //byte[] data = Encoding.UTF8.GetBytes(message);
+            //int numberOfSentBytes = client.Send(data, data.Length);
 
-            IPEndPoint ip = null;
-            byte[] data2 = client.Receive(ref ip);
-            string message2 = Encoding.UTF8.GetString(data2);
-            textBox.Text = message2;
-            if (message2[4]!='0')
-            textBox.Text = "Реле включено";
-            else textBox.Text = "Реле выключено";
-            client.Close();
+            //IPEndPoint ip = null;
+            //byte[] data2 = client.Receive(ref ip);
+            //string message2 = Encoding.UTF8.GetString(data2);
+            //textBox.Text = message2;
+            //if (message2[4]!='0')
+            //textBox.Text = "Реле включено";
+            //else textBox.Text = "Реле выключено";
+            //client.Close();
+
+
+
+            if (releManager.StatConnect == StatusConnect.Connected)
+            {
+                releManager.SetRele(StatusRele.On, StatusRele.Off);
+            }
+            else
+            {
+                throw new Exception("Error");
+            }
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -66,4 +83,9 @@ namespace ReleApp
             client.Close();
         }
     }
+
+
+
+    
+
 }
