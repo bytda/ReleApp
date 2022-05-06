@@ -12,6 +12,9 @@ namespace ReleApp
 
         public StatusConnect StatConnect { get => statConnect; private set => statConnect = value; }
 
+        /// <summary>
+        /// Инициализация.
+        /// </summary>
         public bool InitRele()
         {
 
@@ -19,6 +22,8 @@ namespace ReleApp
 
             return false;
         }
+
+
 
         public bool SetRele(StatusRele statusFirst, StatusRele statusSecond)
         {
